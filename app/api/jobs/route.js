@@ -1,7 +1,7 @@
 export async function GET(req, res) {
     try {
       const skills = req.searchParams;
-      const baseUrl = 'http://0.0.0.0:8080/jobs?skill=react&experience=1&location=Chennai';
+      const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/jobs?skill=react&experience=1&location=Chennai`;
       const queryString = new URLSearchParams();
   
       // for (const key in queryParams) {

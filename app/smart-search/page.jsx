@@ -2,85 +2,59 @@
 import React, { useState } from 'react';
 import styles from "./jobs.module.scss";
 import Button from '@/components/Reusables/Button/Button';
+import Finder from '@/components/Finder/Finder';
 
 export default function Jobs() {
-  const [skill, setSkill] = useState('');
-  const [experience, setExperience] = useState('');
-  const [location, setLocation] = useState('');
+  const [result,setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const checkParams = ()=>{
-    if( skill==="" || experience==="" || location==="") return false;
-    return true;
-  }
-
-  const handleSearch = async () => {
-    setIsLoading(true); // Start loading
-    if( !checkParams()) {
-      console.log("add params")
-      return;
-    };
-    try {
-      const queryParams = new URLSearchParams();
-      if (skill) queryParams.append('skill', skill);
-      if (experience) queryParams.append('experience', experience);
-      if (location) queryParams.append('location', location);
-
-      const url = `/api/jobs?${queryParams.toString()}`;
-      console.log('API Request URL:', url);
-
-      const response = await fetch(url);
-      const json = await response.json();
-
-      console.log('Jobs Data:', json);
-    } catch (error) {
-      console.error('Error fetching jobs:', error);
-    } finally {
-      setIsLoading(false); 
-    }
-  };
-
-  return (
-    <div className={styles.jobsContainer}>
-      <label htmlFor="Skill">
-        Skill
-        <input
-          placeholder="Find jobs you are interested in"
-          value={skill}
-          onChange={(e) => setSkill(e.target.value)}
-        />
-      </label>
-
-      <label htmlFor="Experience">
-        Experience
-        <input
-          placeholder="Enter experience in years"
-          type="number"
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
-        />
-      </label>
-
-      <label htmlFor="Location">
-        Location
-        <input
-          placeholder="Enter location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-      </label>
-
+  return(
+    <div>
+      <Finder setResult={setResult} isLoading={isLoading} setIsLoading={setIsLoading}/>
       <div>
-        <Button
-          onClick={handleSearch}
-          disabled={isLoading} 
-          className={styles.searchButton} 
-          text={isLoading ? 'Loading...' : 'Search'}
-          gradient="linear-gradient(90deg, rgb(4, 4, 153) 0%, rgb(47, 8, 116) 58%, rgb(0, 11, 219) 100%)"
-          textColor='white'
-        >
-        </Button>
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        result?.total_jobs > 0 && (
+          result.jobs.map((job, i) => (
+            <div key={i} className="job-card">
+              <h2>{job.job_title}</h2>
+              <h3>{job.company}</h3>
+              <p><strong>Summary:</strong> {job.summary}</p>
+              <p><strong>Location:</strong> {job.location}</p>
+              <p><strong>Experience:</strong> {job.experience}</p>
+              <p><strong>Salary:</strong> {job.salary}</p>
+              <a href={job.link} target="_blank" rel="noopener noreferrer">View Job Details</a>
+              
+              <div className="job-description">
+                <h4>Job Description</h4>
+                <p>{job.detailed_info.job_description}</p>
+              </div>
+
+              <div className="key-details">
+                <h4>Key Details</h4>
+                <ul>
+                  {Object.entries(job.detailed_info.key_details).map(([key, value], idx) => (
+                    <li key={idx}><strong>{key}:</strong> {value}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="skills">
+                <h4>Skills</h4>
+                <ul>
+                  {job.detailed_info.skills.map((skill, idx) => (
+                    <li key={idx}>{skill}</li>
+                  ))}
+                </ul>
+              </div>
+              
+              <p><strong>Job Posted By:</strong> {job.detailed_info.job_posted_by}</p>
+            </div>
+          ))
+        )
+      )}
+    </div>
     </div>
   );
 }
