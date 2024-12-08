@@ -10,12 +10,16 @@
     justify-content: space-between;
     font-size: 22px;
     font-weight: bold;
+    .header{
+        cursor: pointer;
+    }
     ul{
         display: inline-flex;
         gap: 1rem;
         li{
             list-style: none;
             @extend .textBlue !optional;
+            cursor: pointer;
         }
     }
     button{

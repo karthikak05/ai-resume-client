@@ -1,12 +1,16 @@
 'use client'
 import React,{useState,useEffect} from 'react'
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import styles from "./Navbar.module.scss"
 import Button from '../Reusables/Button/Button'
-import {auth} from '@/firebase/config'
+import { navItems } from '@/data/navbar';
+import { useRouter } from 'next/navigation';
+import { handleUserSignIn,handleUsersSignOut } from '@/utils/usersHandler';
+import {auth} from '@/utils/firebase'
+
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
@@ -17,28 +21,24 @@ export default function Navbar() {
   }, []);
 
   const handleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error("Error signing in: ", error);
-    }
+    await handleUserSignIn();
   };
 
   const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Error signing out: ", error);
-    }
+    await handleUsersSignOut();
+  };
+
+  const handleRedirect = (link)=>{
+    router.push(link)
   };
 
   return (
     <nav className={styles.navbar}>
-        <h1>GenResume.AI</h1>
+        <h1 onClick={()=>(router.push("/"))} className={styles.header}>GenResume.AI</h1>
         <ul>
-            <li>Job Finder</li>
-            <li>AI Resume</li>
+            {navItems.map((item,i)=>(
+              <li key={i} onClick={()=>handleRedirect(item.link)}>{item.name}</li>
+            ))}
         </ul>
         {user ? (
           <div className={styles.auth}>
@@ -46,7 +46,7 @@ export default function Navbar() {
             <div onClick={handleSignOut}><Button text="Sign Out" textColor="white"/></div>
           </div>
         ) : (
-          <div onClick={handleSignIn}><Button text="Sign Up" textColor="white" /></div>
+          <div onClick={handleSignIn}><Button text="Sign In" textColor="white" /></div>
         )}    
     </nav>  
   )
