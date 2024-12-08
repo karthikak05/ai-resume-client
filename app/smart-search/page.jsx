@@ -3,21 +3,22 @@ import React, { useState } from 'react';
 import styles from "./jobs.module.scss";
 import Button from '@/components/Reusables/Button/Button';
 import Finder from '@/components/Finder/Finder';
+import useJobStore from '@/utils/store';
 
 export default function Jobs() {
-  const [result,setResult] = useState([]);
+  const {jobs,setJobs} = useJobStore()
   const [isLoading, setIsLoading] = useState(false);
 
   return(
     <div>
-      <Finder setResult={setResult} isLoading={isLoading} setIsLoading={setIsLoading}/>
+      <Finder setResult={setJobs} isLoading={isLoading} setIsLoading={setIsLoading}/>
       <div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        result?.total_jobs > 0 && (
-          result.jobs.map((job, i) => (
-            <div key={i} className="job-card">
+        jobs?.total_jobs > 0 && (
+          jobs.jobs.map((job, i) => (
+            <div key={i} className={styles.card}>
               <h2>{job.job_title}</h2>
               <h3>{job.company}</h3>
               <p><strong>Summary:</strong> {job.summary}</p>
