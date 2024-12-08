@@ -1,0 +1,25 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+.flexCol{
+    display: flex;
+    flex-direction: column;
+}
+.textBlue{
+    @extend .gradientText;
+    width: fit-content;
+    background: $color-blue-gradient;
+}
+.gradientText{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.glassyDiv{
+    background-color: transparent;
+    background-color: rgba(245, 245, 245, 0.067);
+    backdrop-filter: blur(10px);
+}
