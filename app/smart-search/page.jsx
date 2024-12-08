@@ -4,11 +4,17 @@ import styles from "./jobs.module.scss";
 import Button from '@/components/Reusables/Button/Button';
 import Finder from '@/components/Finder/Finder';
 import useJobStore from '@/utils/store';
+import { useRouter } from 'next/navigation';
 
 export default function Jobs() {
-  const {jobs,setJobs} = useJobStore()
+  const router = useRouter()
+  const {jobs,setJobs,setCurrentJob} = useJobStore()
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleGenerate = (job_details)=>{
+    setCurrentJob(job_details);
+    router.push("/ai-resume")
+  }
   return(
     <div>
       <Finder setResult={setJobs} isLoading={isLoading} setIsLoading={setIsLoading}/>
@@ -51,6 +57,10 @@ export default function Jobs() {
               </div>
               
               <p><strong>Job Posted By:</strong> {job.detailed_info.job_posted_by}</p>
+              <Button text="Generate Resume" 
+              gradient="linear-gradient(90deg, rgb(4, 4, 153) 0%, rgb(47, 8, 116) 58%, rgb(0, 11, 219) 100%)" 
+              onClick={()=>handleGenerate(job)}
+              />
             </div>
           ))
         )
