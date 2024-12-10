@@ -4,4 +4,25 @@
 
 .page{
     height: 200vh;
+    position: relative;
+    .bg{      
+        position: sticky;
+        top: 100px;
+        // height: 600px;
+        // width: 600px;
+        height: 90vh;
+        z-index: 1;
+    }
+    .text{
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        z-index: 99;
+        width: 50%;
+        z-index: 99;
+        h1{
+            font-size: 72px;
+            font-weight: bold;
+        }
+    }
 }
