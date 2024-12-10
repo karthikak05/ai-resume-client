@@ -8,18 +8,18 @@
     overflow-x: hidden;
     .bg{      
         position: absolute;
-        top: 0;
+        top: 50px;
         // height: 600px;
         // width: 600px;
         right: -300px;
         width: 100vw;
-        height: 90vh;
+        height: 100vh;
         z-index: 1;
     }
     .text{
         position: absolute;
         left: 100px;
-        top: 100px;
+        top: 200px;
         z-index: 99;
         width: 50%;
         h1{
