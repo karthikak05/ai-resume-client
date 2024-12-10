@@ -10,7 +10,7 @@ export default function Home() {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, suscipit alias facilis quo corrupti tempore reprehenderit ex sapienteipsum animi voluptatibus quidem iste mollitia quaerat repudiandae! Laborum ut soluta repellendus aspernatur?</p>
         </div>
         <div className={styles.bg}>
-          <Spline scene="https://prod.spline.design/4jSxKgN74H-9eCOe/scene.splinecode" />
+            <Spline scene="https://prod.spline.design/4jSxKgN74H-9eCOe/scene.splinecode" /> 
         </div>
     </div>
   );
