@@ -3,6 +3,7 @@
 @import "@/styles/mixins.scss";
 
 .page{
+    height: 100vh;
     position: relative;
     overflow-x: hidden;
     .bg{      
