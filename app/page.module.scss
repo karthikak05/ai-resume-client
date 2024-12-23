@@ -25,8 +25,9 @@
         h1{
             font-size: 72px;
             font-weight: bold;
-            color: rgb(0, 140, 255);
+            // color: rgb(0, 140, 255);
         }
+        @extend .textBlue !optional;
         z-index: 99;
     }
 }

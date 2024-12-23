@@ -12,6 +12,7 @@
     font-weight: bold;
     .header{
         cursor: pointer;
+        @extend .textBlue !optional;
     }
     ul{
         display: inline-flex;
@@ -23,7 +24,7 @@
         }
     }
     button{
-        background: $color-blue-gradient;
-        color: white;
+        background-color: white;
+        color: black;
     }
 }

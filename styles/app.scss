@@ -12,7 +12,7 @@
 .textBlue{
     @extend .gradientText;
     width: fit-content;
-    background: $color-blue-gradient;
+    background: $color-new-gradient;
 }
 .gradientText{
     -webkit-background-clip: text;
@@ -22,4 +22,11 @@
     background-color: transparent;
     background-color: rgba(245, 245, 245, 0.067);
     backdrop-filter: blur(10px);
+}
+.textGray{
+    color: $color-gray;
+}
+.btnContainer{
+    width: fit-content;
+    margin: auto;
 }

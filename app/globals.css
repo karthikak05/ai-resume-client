@@ -1,7 +1,13 @@
 html,body{
-  /* background: linear-gradient(90deg, #010212  0%, #20234D 100%); */
-  background: black;
-  color: white;
+  /* background: url("/20.png");
+  background-size: cover; */
+  /* background-color: black; */
+  color: black;
   padding: 0;
   margin: 0;
+}
+
+h1,p{
+  margin: 0;
+  padding: 0;
 }
