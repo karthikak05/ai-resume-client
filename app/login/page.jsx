@@ -1,12 +1,25 @@
 import React from 'react'
 import sytles from "./login.module.scss";
-import Button from '@/components/Reusables/Button/Button';
+import LoginPage from '@/components/LoginPage/LoginPage';
 
 export default function Login() {
-    const tags = ["Email ID","Password"]
+    const content = {
+        type:"Login",
+        left:{
+            heading : "Nice to See You Again",
+            text: "WELCOME BACK"
+        },
+        right:{
+            heading : "Login Account",
+            tags :["Email ID","Password"],
+            redirectText : "Don't have an account?",
+            link : "/signup",
+            loginRedirect : "/"
+        }
+    }
   return (
     <div className={sytles.main}>
-        <div className={sytles.left}>
+        {/* <div className={sytles.left}>
             <div className={sytles.bg}></div>
             <div className={sytles.company}>
                 <svg width="24px" height="24px" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +38,7 @@ export default function Login() {
         <div className={sytles.right}>
             <h1>Login Account</h1>
             <div className={sytles.contentRight}>
-                {tags.map((tag,i)=>(
+                {loginTags.map((tag,i)=>(
                 <div className={sytles.input} key={i}>
                     <input type={tag} placeholder={tag} />
                 </div>
@@ -36,7 +49,8 @@ export default function Login() {
                 </div>
                 <div className={sytles.btnContainer}><Button text="Login" textColor="white" bgColor="#097FF5"/></div>
             </div>
-        </div>
+        </div> */}
+        <LoginPage content={content}/>
     </div>
   )
 }

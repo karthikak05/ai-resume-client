@@ -41,6 +41,7 @@ export default function AiResume() {
   // Rendering the resume content once it's available
   return (
     <div className={styles.resumeContainer}>
+       <Navbar/>
       <h1>Custom Resume for Your Job Description</h1>
       <div>
         {loading ? (

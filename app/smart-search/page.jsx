@@ -5,6 +5,7 @@ import Button from '@/components/Reusables/Button/Button';
 import Finder from '@/components/Finder/Finder';
 import useJobStore from '@/utils/store';
 import { useRouter } from 'next/navigation';
+import Navbar from '@/components/Navbar/Navbar';
 
 export default function Jobs() {
   const router = useRouter()
@@ -17,6 +18,7 @@ export default function Jobs() {
   }
   return(
     <div>
+      <Navbar/>
       <Finder setResult={setJobs} isLoading={isLoading} setIsLoading={setIsLoading}/>
       <div>
       {isLoading ? (
