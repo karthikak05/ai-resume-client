@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./resume.module.scss";
 import useJobStore from '@/utils/store';
+import Navbar from '@/components/Navbar/Navbar';
 
 export default function AiResume() {
   const {currentJob, customDescription, setGeneratedResume, generatedResume} = useJobStore();
@@ -14,7 +15,7 @@ export default function AiResume() {
       setIsLoading(true);
       const response = await fetch(url, {
         method: "POST",
-        headers: {
+        headers: {Navbar
           "Content-Type": "application/json",
         },
         body: JSON.stringify(job_details),
